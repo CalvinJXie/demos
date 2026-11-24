@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kalshi Tick Viewer · Historical replay</title>
+    <link rel="stylesheet" href="./viewer.css">
+    <script defer src="./vendor/lightweight-charts-5.0.7.js"></script>
+    <script defer src="./session.js"></script>
+    <script defer src="./reference-data.js"></script>
+    <script defer src="./charts.js"></script>
+    <script defer src="./replay.js"></script>
+</head>
+<body>
+    <header class="topbar">
+        <div class="market-clock-block">
+            <div class="market-clock-copy">
+                <span class="market-clock-label">Market time remaining</span>
+                <strong id="remaining">15:00 remaining</strong>
+                <small class="ticker"></small>
+            </div>
+            <div class="execution-mode-field">Mode<strong>Historical replay</strong></div>
+            <span class="live-badge"><span class="live-pulse"></span>Recorded trades</span>
+        </div>
+        <div class="status-block">
+            <strong class="live" id="replay-status">Historical market</strong>
+            <span>Apr 2, 2026 · <time id="market-utc">16:00:00</time> UTC</span>
+            <a href="../index.html">Portfolio</a>
+        </div>
+    </header>
+    <main>
+        <section class="multi-chart-stack" id="charts" aria-label="Market charts">
+            <article class="chart-card" id="btc-card">
+                <header class="chart-header"><strong>Bitcoin · BRTI</strong>
+                    <label>24h · USD <select id="interval" aria-label="Bitcoin candle interval">
+                        <option value="1">1 min</option><option value="5">5 min</option><option value="15">15 min</option>
+                        <option value="30">30 min</option><option value="60">1 hour</option>
+                    </select></label>
+                </header>
+                <div class="reference-pane" id="bitcoin" aria-label="Bitcoin reference candlesticks"></div>
+            </article>
+            <article class="chart-card">
+                <header class="chart-header"><strong>YES minus NO closes</strong>
+                    <span class="settlement-counts" id="settlement-counts"></span>
+                </header>
+                <div class="reference-pane" id="settlements" aria-label="Cumulative YES minus NO across the latest 24 settled markets"></div>
+            </article>
+        </section>
+        <aside class="paper-panel" aria-label="Historical market price ladder">
+            <header class="dom-contract-bar">
+                <div class="dom-contract-field"><span class="dom-contract-label">Contract</span>
+                    <strong class="ticker"></strong><span id="last-price">Waiting for first trade</span>
+                </div>
+                <button class="paper-auto-center active" id="center" aria-label="Auto-center price ladder" aria-pressed="true" title="Auto-center price ladder">A</button>
+            </header>
+            <p id="paper-book-status" class="paper-book-status">Simulated depth · 1,000 contracts per quoted level</p>
+            <section class="paper-ladder-shell" aria-label="YES price ladder">
+                <div class="paper-ladder-head"><span>MY BID</span><span>BID SIZE</span><span>PRICE</span><span>ASK SIZE</span><span>MY ASK</span><span>VOLUME</span></div>
+                <div class="paper-ladder" id="ladder" tabindex="0" aria-label="Scrollable ladder of simulated quotes and recorded volume"></div>
+            </section>
+            <section class="replay-controls" aria-label="Replay controls">
+                <h2>Replay</h2>
+                <div class="controls-row">
+                    <button id="play" type="button">Play</button><button id="restart" type="button">Restart</button>
+                    <label>Speed <select id="speed"><option value="1">1×</option><option value="4">4×</option><option value="12" selected>12×</option><option value="30">30×</option></select></label>
+                </div>
+                <div class="seek-row"><input type="range" aria-label="Replay position" id="seek" min="0" max="900" step="0.1" value="360"><output id="elapsed" for="seek">06:00</output></div>
+                <div class="totals"><span id="trade-count">0</span> trades · <span id="contracts">0</span> contracts</div>
+            </section>
+            <section class="prints"><h2>Trade tape</h2>
+                <table><thead><tr><th>UTC time</th><th>Taker</th><th>YES price</th><th>Qty</th></tr></thead><tbody id="tape"></tbody></table>
+            </section>
+        </aside>
+    </main>
+    <template id="tick-template">
+        <article class="chart-card"><header class="chart-header">
+            <select data-role="chart-size"><option value="10">10 ticks</option><option value="50">50 ticks</option>
+                <option value="100">100 ticks</option><option value="200">200 ticks</option><option value="500">500 ticks</option></select>
+            <span class="chart-clock" data-role="market-time"></span>
+        </header><div class="tick-chart"></div></article>
+    </template>
+    <footer>Recorded Kalshi trades and Bitcoin reference prices. Chart volume and ladder volume show traded contracts.
+        <a href="https://www.tradingview.com/">TradingView Lightweight Charts™</a> © 2025 TradingView, Inc.
+    </footer>
+</body></html>

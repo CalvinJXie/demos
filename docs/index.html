@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Watch the Kalshi Tick Viewer in action and try a historical market replay.">
+    <title>Kalshi Tick Viewer · Market projects</title>
+    <link rel="stylesheet" href="./site.css">
+    <script defer src="./home.js"></script>
+</head>
+<body class="home">
+    <header class="nav">
+        <a class="brand" href="./index.html"><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span>Market projects</a>
+        <span class="nav-meta">Portfolio</span>
+    </header>
+    <main class="showcase">
+        <section class="showcase-heading">
+            <div>
+                <p class="kicker">Market software</p>
+                <h1>Kalshi Tick Viewer</h1>
+                <p class="lede">A trading dashboard for Kalshi’s 15-minute Bitcoin markets. Watch tick-by-tick candles, contract volume, the Bitcoin reference index, and recent YES/NO settlements alongside the price ladder.</p>
+            </div>
+            <div class="showcase-actions"><button class="primary" type="button" id="watch" hidden>Watch walkthrough</button>
+            <a class="replay-link" href="./kalshi-viewer/index.html">Try the historical replay</a></div>
+        </section>
+        <figure class="preview">
+            <video id="walkthrough" controls playsinline preload="metadata" poster="./media/live-viewer.jpg" aria-describedby="walkthrough-caption">
+                <source src="./media/live-viewer.mp4" type="video/mp4">
+                <a href="./media/live-viewer.mp4">Open the walkthrough video</a>
+            </video>
+            <figcaption id="walkthrough-caption">
+                <span>Kalshi Tick Viewer · Screen recording</span>
+                <span>2 min 31 sec · 1080p</span>
+            </figcaption>
+        </figure>
+    </main>
+</body>
+</html>
